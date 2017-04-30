@@ -11,20 +11,37 @@ Foreign key needs to be done
 */
 
 CREATE TABLE COUNTRY 
-( c_id INTEGER NOT NULL, c_code VARCHAR2 (4), c_name VARCHAR2 (50), 
+( c_id INTEGER NOT NULL, 
+c_code VARCHAR2 (4), 
+c_name VARCHAR2 (50), 
 PRIMARY KEY (c_id) );
 
 
 CREATE TABLE INDICIA_PUBLISHER
-( ind_id INTEGER NOT NULL, ind_name VARCHAR2(200), pub_id INTEGER NOT NULL, c_id INTEGER NOT NULL, ind_yr_b INTEGER, ind_yr_e INTEGER, sur NUMBER(1), ind_notes VARCHAR2(3000), ind_url VARCHAR2(200), 
+( ind_id INTEGER NOT NULL, 
+ind_name VARCHAR2(200), 
+pub_id INTEGER NOT NULL, 
+c_id INTEGER NOT NULL, 
+ind_yr_b INTEGER, 
+ind_yr_e INTEGER, 
+sur NUMBER(1), 
+ind_notes VARCHAR2(3000), 
+ind_url VARCHAR2(200), 
 PRIMARY KEY (ind_id));
 
 /* Foreign key needs to be done */
 
 
 CREATE TABLE PUBLISHER 
-( pub_id INTEGER NOT NULL, pub_name VARCHAR2(200), c_id INTEGER NOT NULL, pub_yr_b INTEGER, pub_yr_e INTEGER, pub_notes VARCHAR2(3000), pub_url VARCHAR2(300),
-PRIMARY KEY (pub_id), FOREIGN KEY (c_id) REFERENCES COUNTRY );
+( pub_id INTEGER NOT NULL, 
+pub_name VARCHAR2(200), 
+c_id INTEGER NOT NULL, 
+pub_yr_b INTEGER, 
+pub_yr_e INTEGER, 
+pub_notes VARCHAR2(3202), 
+pub_url VARCHAR2(300),
+PRIMARY KEY (pub_id), 
+FOREIGN KEY (c_id) REFERENCES COUNTRY );
 
 
 
