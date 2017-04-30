@@ -44,30 +44,72 @@ PRIMARY KEY (pub_id),
 FOREIGN KEY (c_id) REFERENCES COUNTRY );
 
 
+CREATE TABLE LANG 
+( l_id INTEGER, 
+lang_code VARCHAR(4), 
+lang_name VARCHAR(27),
+PRIMARY KEY (l_id) );
 
 /*
+CREATE TABLE SERIES
+( s_id INTEGER, 
+s_name VARCHAR(100), 
+format VARCHAR(20), 
+series_yr_b DATE, 
+series_yr_e DATE, 
+pub_dates VARCHAR(50), 
+fiss_id INTEGER, 
+liss_id INTEGER, 
+pub_id INTEGER, 
+c_id INTEGER, 
+langid INTEGER, 
+series_notes VARCHAR(300), 
+color VARCHAR(100), 
+dimensions VARCHAR(50), 
+paper_stock VARCHAR(50), 
+binding VARCHAR(100), 
+format VARCHAR(50), 
+pub_type_id INTEGER,
+PRIMARY KEY(s_id, s_name), 
+FOREIGN KEY (fiss_id, liss_id) REFERENCES ISSUE, 
+FOREIGN KEY (pub_id) REFERENCES PUBLISHER, 
+FOREIGN KEY (c_id) REFERENCES COUNTRY, 
+FOREIGN KEY (langid) REFERENCES LANG, 
+FOREIGN KEY (pub_type_id) REFERENCES SERIES_PUBLICATION_TYPE );
 
 
 CREATE TABLE ISSUE 
-(iss_id INTEGER, iss_num INTEGER, s_id INTEGER, ind_id INTEGER, pub_date VARCHAR(20), price VARCHAR(30), page_count FLOAT, ind_freq VARCHAR(30), iss_editing VARCHAR(100), iss_notes VARCHAR(300), isbn VARCHAR(10), valid_isbn INTEGER, bcode VARCHAR(20), iss_title VARCHAR(100), on_sale_date DATE, rating VARCHAR(50), 
-PRIMARY KEY (iss_id), FOREIGN KEY (s_id) REFERENCES SERIES, FOREIGN KEY (ind_id) REFERENCES INDICIA_PUBLISHER );
+(iss_id INTEGER NOT NULL, 
+iss_num INTEGER, 
+s_id INTEGER NOT NULL, 
+ind_id INTEGER, 
+pub_date VARCHAR(20), 
+price VARCHAR(30), 
+page_count FLOAT, 
+ind_freq VARCHAR(30), 
+iss_editing VARCHAR(100), 
+iss_notes VARCHAR(300), 
+isbn VARCHAR(10), 
+valid_isbn INTEGER, 
+bcode VARCHAR(20), 
+iss_title VARCHAR(100), 
+on_sale_date DATE, 
+rating VARCHAR(50), 
+PRIMARY KEY (iss_id), 
+FOREIGN KEY (s_id) REFERENCES SERIES, 
+FOREIGN KEY (ind_id) REFERENCES INDICIA_PUBLISHER );
 
 CREATE TABLE ISSUEREPRINT
 (re_id INTEGER, iss_origin_id INTEGER, iss_target_id INTEGER,
 PRIMARY KEY (re_id), FOREIGN KEY(iss_origin_id) REFERENCES ISSUE, FOREIGN KEY (iss_target_id) REFERENCES ISSUE );
 
-CREATE TABLE LANG 
-( l_id INTEGER, lang_code VARCHAR(4), lang_name VARCHAR(25),
-PRIMARY KEY (l_id) );
+
 
 
 CREATE TABLE SERIES_PUBLICATION_TYPE
 ( ser_type_id INTEGER, ser_name VARCHAR(8) ,
 PRIMARY KEY(ser_type_id) );
 
-CREATE TABLE SERIES
-( s_id INTEGER, s_name VARCHAR(100), format VARCHAR(20), series_yr_b DATE, series_yr_e DATE, pub_dates VARCHAR(50), fiss_id INTEGER, liss_id INTEGER, pub_id INTEGER, c_id INTEGER, langid INTEGER, series_notes VARCHAR(300), color VARCHAR(100), dimensions VARCHAR(50), paper_stock VARCHAR(50), binding VARCHAR(100), format VARCHAR(50), pub_type_id INTEGER,
-PRIMARY KEY(s_id, s_name), FOREIGN KEY (fiss_id, liss_id) REFERENCES ISSUE, FOREIGN KEY (pub_id) REFERENCES PUBLISHER, FOREIGN KEY (c_id) REFERENCES COUNTRY, FOREIGN KEY (langid) REFERENCES LANG, FOREIGN KEY (pub_type_id) REFERENCES SERIES_PUBLICATION_TYPE );
 
  CREATE TABLE STORY_REPRINT
 ( sr_id INTEGER, st_origin_id INTEGER, st_target_id INTEGER, 
